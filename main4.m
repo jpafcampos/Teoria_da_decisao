@@ -11,9 +11,6 @@ Yc=table2array(data(:,2));
 B=table2array(data(:,3));
 
 [ Xpa, Ypa, Vpa, C, D ] = inicio_sol(Xc,Yc,B);
-C=desliga_pa( 10,Vpa,Xc,Yc,Xpa,Ypa,C,D);
-for i=1:500
-G(i)=sum(C(:,500));
-end
-liga_pa( 10,Vpa,Xc,Yc,Xpa,Ypa,C,D,0.5);
+C=desliga_pa(10,Vpa,Xc,Yc,Xpa,Ypa,C,D);
+
 
