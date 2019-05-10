@@ -1,12 +1,13 @@
-function [ C,D ] = desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D)
+function [ nC,nD, nVpa ] = desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
-newC=C;
-pC=newC;
+nC=C;
+nD=D;
+nVpa=Vpa;
 
 nPA=length(Xpa);
 Nc=length(Xc);
-
+pC=ones(nPA,Nc);
 for i=1:nPA
     for j=1:Nc
         D(i,j)=sqrt((Xpa(i)-Xc(j))^2+(Ypa(i)-Yc(j))^2);
@@ -16,9 +17,12 @@ for i=1:nPA
     end
 end
 
-id=find(pC(idVpa,:)==1);
+
+id=find(C(idVpa,:)==1);
 tid=length(id);
 pC(idVpa,:)=0;
+nC(idVpa,:)=pC(idVpa,:);
+
 
 if (tid>0)
     for i=1:tid
@@ -27,21 +31,17 @@ if (tid>0)
         tidc=length(idc);
         if (tidc>0)
             g=randi(tidc,1,1);
-            pC(idVpa,j)=0;
-            pC(id(g),j)=1;
+            
+            pC(:,j)=0;
+            nC(:,j)=pC(:,j);
+            pC(idc(g),j)=1;
+            nC(idc(g),j)=pC(idc(g),j);
         end
     end
 end
-% for j=1:Nc
-%     id=find(pC(:,j)==1);
-%     tid=length(id);
-%     if (tid>0)
-%         g=randi(tid,1,1);
-%         pC(:,j)=0;
-%         pC(id(g),j)=1;
-%     end
-% end
 
+
+nVpa(idVpa)=0;
 
 end
 

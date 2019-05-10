@@ -22,8 +22,24 @@ end
 
 
 
+idc=find(pC(idVpa,:)==1);
+tidc=length(idc);
+if (tidc>0)
+    for i=1:tidc
+        j=idc(i);
+        g=randi(tidc,1,1);
+        pC(idVpa,j)=0;
+        pC(id(g),j)=1;
+    end
+    end
+end
+
+
+end
 
 
 C=pC;
+Vpa(idVpa)=1;
+
 end
 
