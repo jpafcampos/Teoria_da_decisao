@@ -11,6 +11,6 @@ Yc=table2array(data(:,2));
 B=table2array(data(:,3));
 
 [ Xpa, Ypa, Vpa, C, D ] = inicio_sol(Xc,Yc,B);
-C=desliga_pa(10,Vpa,Xc,Yc,Xpa,Ypa,C,D);
-
+[C,D,Vpa]=desliga_pa(10,Vpa,Xc,Yc,Xpa,Ypa,C,D);
+[C,D,Vpa]=liga_pa(10,Vpa,Xc,Yc,Xpa,Ypa,C,D);
 
