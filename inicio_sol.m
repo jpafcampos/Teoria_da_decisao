@@ -1,4 +1,4 @@
-function [ Xpa, Ypa, Vpa, C,D ] = inicio_sol(Xc,Yc,B)
+function [ Xpa, Ypa, Vpa, C,D, gVpa ] = inicio_sol(Xc,Yc,B)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
 Nc=length(Xc);

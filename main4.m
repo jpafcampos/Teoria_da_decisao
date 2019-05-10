@@ -10,7 +10,7 @@ Xc=table2array(data(:,1));
 Yc=table2array(data(:,2));
 B=table2array(data(:,3));
 
-[ Xpa, Ypa, Vpa, C, D ] = inicio_sol(Xc,Yc,B);
-[C,D,Vpa]=desliga_pa(10,Vpa,Xc,Yc,Xpa,Ypa,C,D);
+[ Xpa, Ypa, Vpa, C, D, gVpa ] = inicio_sol(Xc,Yc,B);
+[C,D,Vpa,gVpa]=desliga_pa(10,Vpa,Xc,Yc,Xpa,Ypa,C,D,gVpa);
 [C,D,Vpa]=liga_pa(10,Vpa,Xc,Yc,Xpa,Ypa,C,D);
 
