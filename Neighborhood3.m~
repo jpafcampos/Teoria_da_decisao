@@ -1,4 +1,4 @@
-function [Vfim, Cl, D] = Neighborhood3(Vinit,Vpa,Xc,Yc,Xpa,Ypa,C,D, prob)
+function [Vfim, Cl, D] = Neighborhood3(Vinit,Vpa,Xc,Yc,Xpa,Ypa,C,D)
    %Liga um PA aleatorio e desliga outro PA aleatorio
     Vfim = Vinit;
     n = length(Vinit);
@@ -30,8 +30,8 @@ function [Vfim, Cl, D] = Neighborhood3(Vinit,Vpa,Xc,Yc,Xpa,Ypa,C,D, prob)
         p = p + 1;
     end
     
-    [ Cl,D ] = desliga_pa( ponto_desligado,Vpa,Xc,Yc,Xpa,Ypa,C,D);
-    [ Cl,D ] = liga_pa( ponto_ligado,Vpa,Xc,Yc,Xpa,Ypa,Cl,D, prob);
+    [ Cl,D ] = desliga_pa( ponto_ligado(1),Vpa,Xc,Yc,Xpa,Ypa,C,D);
+    [ Cl,D ] = liga_pa( Vinit(ponto_ligado),Vpa,Xc,Yc,Xpa,Ypa,Cl,D);
     
 end
 

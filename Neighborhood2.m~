@@ -1,4 +1,4 @@
-function [Vfim, Cl, D] = Neighborhood2(Vinit,Vpa,Xc,Yc,Xpa,Ypa,C,D)
+function [Vfim, Cl, D] = Neighborhood2(Vinit,Vpa,Xc,Yc,Xpa,Ypa,C,D,prob )
 %Recebe um vetor bin�rio, procura por 1, e os transforma em 0
 
     Vfim = Vinit;
@@ -28,8 +28,8 @@ function [Vfim, Cl, D] = Neighborhood2(Vinit,Vpa,Xc,Yc,Xpa,Ypa,C,D)
         end
     end
     %Desliga os PA
-    [Cl, D] = desliga_pa( a(1),Vpa,Xc,Yc,Xpa,Ypa,C, D );
-    [Cl, D] = desliga_pa( a(2),Vpa,Xc,Yc,Xpa,Ypa,Cl,D);
+    [Cl, D] = desliga_pa( a(1),Vpa,Xc,Yc,Xpa,Ypa,C,D,prob );
+    [Cl, D] = desliga_pa( a(2),Vpa,Xc,Yc,Xpa,Ypa,C,D,prob );
     
 
 end
