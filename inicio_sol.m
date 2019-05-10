@@ -1,4 +1,4 @@
-function [ Xpa, Ypa, Vpa, C ] = inicio_sol(Xc,Yc,B)
+function [ Xpa, Ypa, Vpa, C,D ] = inicio_sol(Xc,Yc,B)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
 Nc=length(Xc);
@@ -31,6 +31,8 @@ for i=1:sPA
     end
     k=j+1;
 end
+gXpa=Xpa;
+gYpa=Ypa;
 
 D=zeros(nPA,Nc);
 pC=ones(nPA,Nc);
@@ -67,8 +69,8 @@ for i=1:nPA
         end
     end
     if (flagerro==0)
-        Xpa(id)=0;
-        Ypa(id)=0;
+        gXpa(id)=0;
+        gYpa(id)=0;
     end
 end
 
@@ -94,14 +96,14 @@ psize=30;
 % [Bs, Bi] = sort(B(:, 1));
 % ABi(vrid) = Bi;
 
-
+C=pC;
  
 scatter(Xc(:), Yc(:), psize, gVpa(:));
 colormap(prism(64))
 %colormap(flag(64))
 
 hold on
-scatter(Xpa(:), Ypa(:), psize,(1:64),'*');
+scatter(gXpa(:), gYpa(:), psize,(1:64),'*');
 
 
 % 
