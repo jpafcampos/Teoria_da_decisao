@@ -1,4 +1,4 @@
-function [ Yfim ] = Neighborhood6( Yinit )
+function [ Yfim, Cl ] = Neighborhood6( Yinit,C )
 
 u = rand();
 G = 0;

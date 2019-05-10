@@ -1,4 +1,4 @@
-function [ Xfim ] = Neighborhood5( Xinit )
+function [ Xfim, Cl] = Neighborhood5( Xinit, C)
 
 u = rand();
 G = 0;

@@ -1,16 +1,25 @@
-function [ vfim ] = Neighborhood1(Vinit)
-%Recebe um vetor binário e da o flip em uma posição
-
-    vfim = Vinit;
+function [ Vfim, Cl ] = Neighborhood1(Vinit,C)
+%Recebe um vetor binário, procura por um PA aleatório = 1 e o transforma em
+%0
+    
+    Vfim = Vinit;
+    
+    %Tamanho do Vetor
     n = length(Vinit);
     p = 1;
+    %indices do Vinit permutados aleatóriamente
     r = randperm(n);
     
-    while vfim(r(p)) ~= 1
+    %Procura por um 1
+    while Vfim(r(p)) ~= 1
         p = p +1;
     end
     
-    vfim(r(p)) = not(Vinit(r(p)));
-
+    %Flip do primeiro 1 encontrado
+    Vfim(r(p)) = not(Vinit(r(p)));
+    
+    %Atualiza Cl
+    C(r(p),:) = zeros(1,500); 
+    Cl = C;
 end
 
