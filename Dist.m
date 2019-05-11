@@ -32,7 +32,7 @@ end
 if (factivel == 1)
     for i=1:nPA
         for j=1:nC
-        b = d(j)*v(i)*sum(C(i,:));
+        b = b + d(j)*C(i,j);
             if b>150
                 factivel = 0;
             end
