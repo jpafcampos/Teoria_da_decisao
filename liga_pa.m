@@ -1,4 +1,4 @@
-function [ nC,nD, nVpa,ngVpa ] = liga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D)
+function [ nC,nD, nVpa ] = liga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
