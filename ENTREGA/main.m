@@ -10,17 +10,26 @@ B=table2array(data(:,3));
 
 [ Xpa, Ypa, Vpa, C,D, gVpa ] = solucao_inicial(Xc,Yc,B);
 
-
-fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
 idVpa=10;
 
+for j=1:500
+    for k=1:64
+        if (C(k,j)==1)
+            v(j)=k;
+        end
+    end
+end
+   
+for i=1:6
+    fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
+    [ C,D, Vpa ]=desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D);    
+    for j=1:500
+        for k=1:64
+            if (C(k,j)==1)
+                v(j)=k;
+            end
+        end
+    end
+    idVpa=i;
+end
 
-    
-[ C,D, Vpa, gVpa ]=desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D, gVpa);
-
-fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
-idVpa=18;
-[ C,D, Vpa, gVpa ]=desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D, gVpa);
-fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
-
-%[ nC,nD, nVpa,ngVpa ] = desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D,gVpa);

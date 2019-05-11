@@ -1,11 +1,10 @@
-function [ nC,nD, nVpa,ngVpa ] = desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D,gVpa)
+function [ nC,nD, nVpa ] = desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D)
 
 
 %Inicialização das variáveis
 nC=C;
 nD=D;
 nVpa=Vpa;
-ngVpa=gVpa;
 nPA=length(Xpa);
 Nc=length(Xc);
 pC=ones(nPA,Nc);
@@ -43,7 +42,6 @@ if (tid>0)
             nC(:,j)=pC(:,j);
             pC(idc(g),j)=1;
             nC(idc(g),j)=pC(idc(g),j);
-            gVpa(j)=id(g);
         end
     end
 end
@@ -59,7 +57,6 @@ end
 
 % figure(2)
 % psize=30;
- ngVpa=gVpa;
 % scatter(Xc(:), Yc(:), psize, gVpa(:));
 % colormap(prism(nPA))
 % hold on

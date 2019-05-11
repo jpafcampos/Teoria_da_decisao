@@ -93,18 +93,8 @@ for j=1:Nc
 end
 psize=30;
 
-
 C=pC;
  
-scatter(Xc(:), Yc(:), psize, gVpa(:));
-colormap(prism(64))
-
-hold on
-scatter(gXpa(:), gYpa(:), psize,(1:64),'*');
-
-
-
-
 
 end
 
