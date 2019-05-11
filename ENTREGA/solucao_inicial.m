@@ -39,8 +39,7 @@ D=zeros(nPA,Nc); %Distância de todas as PA's para clientes
 pC=ones(nPA,Nc); %Possiveis PA's a atender um cliente
 sB=zeros(nPA,1); %Soma da banda consumida na PA
 sC=zeros(Nc,1); %Verificação de quantas PAs podem atender aquele cliente
-
-%Calculo da distância e banda consumida na PA.
+%Calculo da distância e banda consumida na PA
 for i=1:nPA
     for j=1:Nc
         D(i,j)=sqrt((Xpa(i)-Xc(j))^2+(Ypa(i)-Yc(j))^2);
