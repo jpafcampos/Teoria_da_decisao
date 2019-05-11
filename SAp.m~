@@ -40,7 +40,7 @@ min_num_PA = 26;
 
 
 % Crit�rio de parada 
-while (numEstagiosEstagnados <= 10 && nfe < 1000 && numPA > min_num_PA)
+while (numEstagiosEstagnados <= 10 && nfe < 5000 && numPA > min_num_PA)
     
     %contador
     m = 0;
@@ -51,7 +51,7 @@ while (numEstagiosEstagnados <= 10 && nfe < 1000 && numPA > min_num_PA)
         [vl, Cl, D, ngVpa] =  Neighborhood1(Vpa,Xc,Yc,Xpa, Ypa,C,D, gVpa); %modifica o C tb n � o indice da vizinhan�a
         
         %atualiza o nfe
-        nfe = nfe + 1;
+        nfe = nfe + 1
         %C�lculo Delta E
         %[numPA] = NPA(v, x, y, Xc, Yc C, d)
         DeltaE = NPA(vl,Xpa,Ypa, Xc, Yc,Cl,B) - NPA(Vpa,Xpa,Ypa,Xc,Yc,C,B);
@@ -82,8 +82,9 @@ while (numEstagiosEstagnados <= 10 && nfe < 1000 && numPA > min_num_PA)
             %current Melhorou, incremento a estagnados
             numEstagiosEstagnados = numEstagiosEstagnados + 1;
         end
+            m = m + 1;
     end
-    m = m + 1;
+
     
     %Usar o Geom�trico 
     tk = alpha*tk;

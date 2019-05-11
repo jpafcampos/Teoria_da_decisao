@@ -63,7 +63,7 @@ while (numEstagiosEstagnados <= 10 && nfe < 1000 && numPA > min_num_PA)
              x = Xpa;
              y = Ypa;
              %melhor solu��o
-             if NPA(vbest, xbest, ybest,Xc,Yc, Cbest,B) - NPA(Vpa,x,y,Xc,Yc,C,B) > 0
+             if NPA(vbest, xbest, ybest,Xc,Yc, Cbest,B) - NPA(v,x,y,Xc,Yc,C,B) > 0
                  vbest = v;
                  xbest = x;
                  ybest = y;

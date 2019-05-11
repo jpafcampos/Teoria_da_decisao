@@ -18,6 +18,9 @@ for i=1:nPA
             pC(i,j)=0;
         end
     end
+    if (Vpa(i)==0)
+       pC(i,:)=0;
+    end
 end
 
 
@@ -35,15 +38,12 @@ if (tid>0)
         gVpa(j)=0;
         if (tidc>0)
             g=randi(tidc,1,1);
-            try
+            
             pC(:,j)=0;
             nC(:,j)=pC(:,j);
             pC(idc(g),j)=1;
             nC(idc(g),j)=pC(idc(g),j);
-  %          gVpa(j)=id(g); 
-            catch
-                stop
-            end
+            %gVpa(j)=id(g);
         end
     end
 end
@@ -57,15 +57,16 @@ gXpa(i)=Xpa(i)*nVpa(i);
 gYpa(i)=Ypa(i)*nVpa(i);
 end
 
-figure(2)
-psize=30;
-ngVpa=gVpa;
-scatter(Xc(:), Yc(:), psize, gVpa(:));
-colormap(prism(nPA))
-hold on
-scatter(gXpa(:), gYpa(:), psize,(1:64),'*');
+% figure(2)
+% psize=30;
+ ngVpa=gVpa;
+% scatter(Xc(:), Yc(:), psize, gVpa(:));
+% colormap(prism(nPA))
+% hold on
+% scatter(gXpa(:), gYpa(:), psize,(1:64),'*');
 
 
 
 
 end
+
