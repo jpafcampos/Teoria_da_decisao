@@ -1,4 +1,4 @@
-function [numPA] = NPA(v, x, y, C, d)
+function [numPA] = NPA(v, x, y, Xc, Yc C, d)
 %Retorna o numero de pontos de acesso, considerando as restrições. Se uma
 %restrição é violada, retorna o numero de PA's + 1000.
 factivel = 1;
@@ -6,11 +6,6 @@ nPA = length(v);
 nC = 500;
 
 b = 0;
-
-data = readtable('clientes.csv');
-Xc=table2array(data(:,1));
-Yc=table2array(data(:,2));
-B=table2array(data(:,3));
 
 %restricao de distancia e de numero de pontos de acesso por cliente
 for i=1:nPA
