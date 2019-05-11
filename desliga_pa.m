@@ -1,6 +1,7 @@
 function [ nC,nD, nVpa,ngVpa ] = desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D,gVpa)
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
+
+
+%Inicialização das variáveis
 nC=C;
 nD=D;
 nVpa=Vpa;
@@ -8,6 +9,8 @@ ngVpa=gVpa;
 nPA=length(Xpa);
 Nc=length(Xc);
 pC=ones(nPA,Nc);
+
+
 for i=1:nPA
     for j=1:Nc
         D(i,j)=sqrt((Xpa(i)-Xc(j))^2+(Ypa(i)-Yc(j))^2);
@@ -32,12 +35,15 @@ if (tid>0)
         gVpa(j)=0;
         if (tidc>0)
             g=randi(tidc,1,1);
-            
+            try
             pC(:,j)=0;
             nC(:,j)=pC(:,j);
             pC(idc(g),j)=1;
             nC(idc(g),j)=pC(idc(g),j);
-            gVpa(j)=id(g);
+  %          gVpa(j)=id(g); 
+            catch
+                stop
+            end
         end
     end
 end
@@ -51,11 +57,11 @@ gXpa(i)=Xpa(i)*nVpa(i);
 gYpa(i)=Ypa(i)*nVpa(i);
 end
 
+figure(2)
 psize=30;
 ngVpa=gVpa;
 scatter(Xc(:), Yc(:), psize, gVpa(:));
-colormap(prism(64))
-%colormap(flag(64))
+colormap(prism(nPA))
 hold on
 scatter(gXpa(:), gYpa(:), psize,(1:64),'*');
 
@@ -63,4 +69,3 @@ scatter(gXpa(:), gYpa(:), psize,(1:64),'*');
 
 
 end
-

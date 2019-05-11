@@ -11,5 +11,6 @@ B = clientes (:,3);
 B = table2array(B);
 
 %[ Xpa, Ypa, Vpa, C, D, gVpa ] = inicio_sol(Xc,Yc,B);
+%a = sum(Vpa);
 [vbest, xbest, ybest, Cbest] = SAp(0.9, 1, Xc, Yc, B);
 
