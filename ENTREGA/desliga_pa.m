@@ -18,7 +18,7 @@ for i=1:nPA
             pC(i,j)=0;
         end
     end
-    if (Vpa(i)=0)
+    if (Vpa(i)==0)
        pC(i,:)=0;
     end
 end
