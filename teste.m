@@ -3,19 +3,13 @@ clear all
 close all
 
 clientes = readtable('clientes.csv');
-x = clientes(:,1);
-y = clientes(:,2);
-x = table2array(x);
-y = table2array(y);
+Xc = clientes(:,1);
+Yc = clientes(:,2);
+Xc = table2array(Xc);
+Yc = table2array(Yc);
+B = clientes (:,3);
+B = table2array(B);
 
-p = [x, y];
-plot(x,y,'ro');
-pontosx = [0:85:800];
-for i=1:10
-    pontosy(i,:) = [0:85:800];
-end
-pontosy = pontosy+15;
-pontosx = pontosx+15;
+%[ Xpa, Ypa, Vpa, C, D, gVpa ] = inicio_sol(Xc,Yc,B);
+[vbest, xbest, ybest, Cbest] = SAp(0.9, 1, Xc, Yc, B);
 
-hold on
-plot (pontosx, pontosy, 'k*');
