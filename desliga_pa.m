@@ -29,6 +29,7 @@ if (tid>0)
         j=id(i);
         idc=find(pC(:,j)==1);
         tidc=length(idc);
+        gVpa(j)=0;
         if (tidc>0)
             g=randi(tidc,1,1);
             
@@ -42,6 +43,7 @@ if (tid>0)
 end
 
 nVpa(idVpa)=0;
+
 gXpa=Xpa;
 gYpa=Ypa;
 for i=1:nPA
@@ -50,11 +52,10 @@ gYpa(i)=Ypa(i)*nVpa(i);
 end
 
 psize=30;
-
+ngVpa=gVpa;
 scatter(Xc(:), Yc(:), psize, gVpa(:));
 colormap(prism(64))
 %colormap(flag(64))
-
 hold on
 scatter(gXpa(:), gYpa(:), psize,(1:64),'*');
 

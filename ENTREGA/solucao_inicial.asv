@@ -1,31 +1,30 @@
-function [ Xpa, Ypa, Vpa, C,D, gVpa ] = inicio_sol(Xc,Yc,B)
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
+function [ Xpa, Ypa, Vpa, C,D, gVpa ] = solucaoinicial(Xc,Yc,B)
 
-
-
+%Dados iniciais do espaço.
 Ai=800;
 Aj=Ai;
 fcor=1;
 fcob=1;
 rpa=85;
+%Cálculo para distribuição uniforme em grid das PAs
 Apa=pi*(rpa)^2;
 nPA=(round(sqrt(round((Ai*Aj*fcob*fcor)/Apa)*2))+1)^2;
 sPA=sqrt(nPA);
 Xi=round(linspace(rpa/2*fcob,Ai-rpa/2*fcob,sqrt(nPA))); 
 Yi=round(linspace(rpa/2*fcob,Ai-rpa/2*fcob,sqrt(nPA)));
-Xpa=zeros(nPA,1);
-Ypa=zeros(nPA,1);
-Vpa=ones(nPA,1);
-C=zeros(nPA,Nc);
 
-Nc=length(Xc);
+%Incicalização das variáveis
+Xpa=zeros(nPA,1); %Posição X da Pa
+Ypa=zeros(nPA,1); %Posição Y da Pa
+Vpa=ones(nPA,1); %Vetor de ativação da Pa
+C=zeros(nPA,Nc); %Matriz de atendimento PA e cliente
+
+Nc=length(Xc); %Número de clientes
 
 k=1;
 j=k;
 
-
-
+s
 for i=1:sPA
     for j=k:(k+sPA-1)
         Xpa(j)=Xi(i);

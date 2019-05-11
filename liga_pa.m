@@ -1,10 +1,11 @@
-function [ nC,nD, nVpa ] = liga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D)
+function [ nC,nD, nVpa,ngVpa ] = liga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D,gVpa)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
 nC=C;
 nD=D;
 nVpa=Vpa;
+ngVpa=gVpa;
 
 nPA=length(Xpa);
 Nc=length(Xc);
@@ -33,13 +34,30 @@ if (tid>0)
         pC(:,j)=0;
         pC(idVpa,j)=1;
         nC(:,j)=pC(:,j);
+        gVpa(j)=idVpa;
     end
 end
 
 
+nVpa(idVpa)=1;
 
 
-nVpa(idVpa)=0;
+gXpa=Xpa;
+gYpa=Ypa;
+for i=1:nPA
+gXpa(i)=Xpa(i)*nVpa(i);
+gYpa(i)=Ypa(i)*nVpa(i);
+end
+
+psize=30;
+ngVpa=gVpa;
+scatter(Xc(:), Yc(:), psize, gVpa(:));
+colormap(prism(64))
+%colormap(flag(64))
+hold on
+scatter(gXpa(:), gYpa(:), psize,(1:64),'*');
+
+
 
 
 end
