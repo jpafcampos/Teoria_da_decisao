@@ -20,16 +20,18 @@ for j=1:500
     end
 end
    
-for i=1:6
+for i=1:14
     fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
     [ C,D, Vpa ]=desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D);    
     for j=1:500
         for k=1:64
             if (C(k,j)==1)
-                v(j)=k;
+                v(1,j)=k;
             end
         end
     end
-    idVpa=i;
+    idVpa=randi(63)+1;
+    v(2,i)=idVpa;
 end
+
 
