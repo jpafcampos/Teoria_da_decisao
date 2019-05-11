@@ -1,4 +1,4 @@
-function [ Xpa, Ypa, Vpa, C,D, gVpa ] = solucao_inicial(Xc,Yc,B)
+function [ Xpa, Ypa, Vpa, C,D ] = solucao_inicial(Xc,Yc,B)
 
 %Dados iniciais do espaço.
 Ai=800;
@@ -51,7 +51,7 @@ for i=1:nPA
         end
     end
 end
-[ordsB,idsB]=sort(sB);
+%[ordsB,idsB]=sort(sB);
 
 %Abordagem de inicio  que atende mais
 
@@ -91,7 +91,6 @@ for j=1:Nc
         gVpa(j)=id(g);
     end
 end
-psize=30;
 
 C=pC;
  
