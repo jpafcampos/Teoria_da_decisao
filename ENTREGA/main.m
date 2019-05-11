@@ -13,12 +13,14 @@ B=table2array(data(:,3));
 
 fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
 idVpa=10;
-m=1;
-while(m<10)
+
+
     
-[ C,D, Vpa,gVpa ]=desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D,gVpa);
+[ C,D, Vpa, gVpa ]=desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D, gVpa);
 
 fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
-m=m+1;
-end
+idVpa=18;
+[ C,D, Vpa, gVpa ]=desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D, gVpa);
+fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
+
 %[ nC,nD, nVpa,ngVpa ] = desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D,gVpa);

@@ -18,6 +18,9 @@ for i=1:nPA
             pC(i,j)=0;
         end
     end
+    if (Vpa(i)==0)
+       pC(i,:)=0;
+    end
 end
 
 
@@ -54,13 +57,13 @@ gXpa(i)=Xpa(i)*nVpa(i);
 gYpa(i)=Ypa(i)*nVpa(i);
 end
 
-figure(2)
-psize=30;
-ngVpa=gVpa;
-scatter(Xc(:), Yc(:), psize, gVpa(:));
-colormap(prism(nPA))
-hold on
-scatter(gXpa(:), gYpa(:), psize,(1:64),'*');
+% figure(2)
+% psize=30;
+ ngVpa=gVpa;
+% scatter(Xc(:), Yc(:), psize, gVpa(:));
+% colormap(prism(nPA))
+% hold on
+% scatter(gXpa(:), gYpa(:), psize,(1:64),'*');
 
 
 
