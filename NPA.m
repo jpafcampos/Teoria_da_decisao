@@ -36,13 +36,11 @@ end
 
 %capacidade dos PA (150)
 if (factivel == 1)
-    for i=1:nPA
-        for j=1:nC
-        b = b + d(j)*C(i,j);
-            if b>150
-                factivel = 0;
-            end
-
+    for i=1:nC
+        b = d*C(i,:)';
+        if b >150
+            factivel = 0;
+            break
         end
     end
 end
