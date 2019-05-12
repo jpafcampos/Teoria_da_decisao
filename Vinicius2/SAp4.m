@@ -23,7 +23,7 @@ x = Xpa;
 y = Ypa;
 
 %coordenada que sofrerá operacao de mudanca de posicao
-operacao = x;
+operacao = 5;
 
 %function [dist] = Dist_total(v, C, x, y, xc, yc, d) d é a demanda!!!
 dist = Dist_total(v, C, x, y, Xc, Yc, B);
@@ -51,13 +51,13 @@ while (numEstagiosEstagnados <= 10 && nfe < 100)
         %Gere uma solu��o xl E N(x)
         %[ Xfim, Cl] = Neighborhood5 (Xinit, C)
         indice = round(63*rand()) + 1;
-        if operacao == x
+        if operacao == 5
            xindice = x(indice);
           [xfim, Cl,D,v] =  Neighborhood5(xindice, indice,v, Xc, Yc,x,y,C,D); %modifica o C tb n � o indice da vizinhan�a
           yl = y;
           xl = x;
           xl(indice) = xfim;
-         if operacao == y
+         if operacao == 6
            yindice = x(indice);
           [yfim, Cl,D,v] =  Neighborhood5(yindice, indice,v, Xc, Yc,x,y,C,D); %modifica o C tb n � o indice da vizinhan�a
           yl = y;
