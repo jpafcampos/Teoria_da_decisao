@@ -1,4 +1,4 @@
-function [vbest, xbest, ybest, Cbest] = SAp(alpha, Epsilon, Xc, Yc, B)
+function [vbest, xbest, ybest, Cbest, dist] = SAp2(alpha, Epsilon, Xc, Yc, B)
 
 % Contador de est�gios do m�todo
 %k = 0;
@@ -8,15 +8,24 @@ nfe = 0;
 
 % Gera solu��o inicial
  
-[Xpa,Ypa, Vpa, C,D, gVpa] = inicio_sol(Xc, Yc, B);
+[Xpa,Ypa, Vpa, C,D] = solucao_inicial(Xc, Yc, B);
+
+%solu��o melhor recebe inicial
 vbest = Vpa;
 xbest = Xpa;
 ybest = Ypa;
 Cbest = C;
 
-%N�mero inicial de PA. NAP � a fun��o objetivo para este problema
-%[numPA] = NPA(v, x, y, Xc, Yc C, d)
-numPA = NPA(Vpa, Xpa, Ypa, Xc, Yc, C, B);
+%solu��o corrente:
+
+v = Vpa;
+x = Xpa;
+y = Ypa;
+
+
+
+%function [dist] = Dist_total(v, C, x, y, xc, yc, d) d é a demanda!!!
+dist = Dist_total(v, C, x, y, Xc, Yc, B);
 
 
 % Define temperatura inicial
@@ -25,45 +34,40 @@ to = 31;
 nfe = 0;
 tk = to;
 %n de itera��es executadas na linha K
-mk = 50; 
-
-
-%n�mero m�nimo de PA
-min_num_PA = 26;
-
-
+mk = 10; 
 
 
 % Crit�rio de parada do algoritmo
  numEstagiosEstagnados = 0;
  
 
-
 % Crit�rio de parada 
-while (numEstagiosEstagnados <= 10 && nfe < 5000 && numPA > min_num_PA)
-    
+while (numEstagiosEstagnados <= 10 && nfe < 100)    
     %contador
     m = 0;
     
     while m <= mk
         %Gere uma solu��o xl E N(x)
-        %Neighborhood1(Vinit,Xc,Yc,Xpa,Ypa,C,D)
-        [vl, Cl, D, ngVpa] =  Neighborhood1(Vpa,Xc,Yc,Xpa, Ypa,C,D, gVpa); %modifica o C tb n � o indice da vizinhan�a
-        
+        %[ Xfim, Cl] = Neighborhood5 (Xinit, C)
+        indice = round(63*rand()) + 1;
+        xindice = x(indice);
+        [xfim, Cl] =  Neighborhood5(xindice, C); %modifica o C tb n � o indice da vizinhan�a
+        yl = y;
+        xl = x;
+        xl(indice) = xfim;
         %atualiza o nfe
-        nfe = nfe + 1
+        nfe = nfe + 1;
         %C�lculo Delta E
-        %[numPA] = NPA(v, x, y, Xc, Yc C, d)
-        DeltaE = NPA(vl,Xpa,Ypa, Xc, Yc,Cl,B) - NPA(Vpa,Xpa,Ypa,Xc,Yc,C,B);
+        DeltaE = Dist_total(v, Cl, xl, y, Xc, Yc, B) - Dist_total(v, C, x, y, Xc, Yc, B);
+        %DeltaE = numero_pa(vl,x,y, Xc, Yc,Cl,B) - numero_pa(v,x,y,Xc,Yc,C,B);
         
         if DeltaE <= 0 
              %Sol Corrente
-             v = vl;
+             x = xl;
              C = Cl;
-             x = Xpa;
-             y = Ypa;
+             
              %melhor solu��o
-             if NPA(vbest, xbest, ybest,Xc,Yc, Cbest,B) - NPA(Vpa,x,y,Xc,Yc,C,B) > 0
+             if Dist_total(vbest, Cbest, xbest, ybest,Xc,Yc,B) - Dist_total(v,C,x,y,Xc,Yc,B) > 0
                  vbest = v;
                  xbest = x;
                  ybest = y;
@@ -83,6 +87,7 @@ while (numEstagiosEstagnados <= 10 && nfe < 5000 && numPA > min_num_PA)
             numEstagiosEstagnados = numEstagiosEstagnados + 1;
         end
             m = m + 1;
+            dist = Dist_total(vbest, Cbest, xbest, ybest,Xc,Yc,B);
     end
 
     
@@ -94,5 +99,5 @@ while (numEstagiosEstagnados <= 10 && nfe < 5000 && numPA > min_num_PA)
     end
     %k = k + 1;
 end
-    
+ dist = Dist_total(vbest, Cbest, xbest, ybest,Xc,Yc,B);
 end

@@ -10,13 +10,13 @@ nfe = 0;
  
 [Xpa,Ypa, Vpa, C,D] = solucao_inicial(Xc, Yc, B);
 
-%solução melhor recebe inicial
+%soluï¿½ï¿½o melhor recebe inicial
 vbest = Vpa;
 xbest = Xpa;
 ybest = Ypa;
 Cbest = C;
 
-%solução corrente:
+%soluï¿½ï¿½o corrente:
 
 v = Vpa;
 x = Xpa;
@@ -89,7 +89,7 @@ while (numEstagiosEstagnados <= 10 && nfe < 100 && numPA > min_num_PA)
             %current Melhorou, incremento a estagnados
             numEstagiosEstagnados = numEstagiosEstagnados + 1;
         end
-            m = m + 1
+            m = m + 1;
             fpa = numero_pa(vbest, xbest, ybest,Xc,Yc, Cbest,B);
     end
 
