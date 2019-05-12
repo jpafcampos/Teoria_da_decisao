@@ -24,7 +24,6 @@ fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
 [ C,D, Vpa ]=desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D);
 for i=1:6
     [ C,D, Vpa ]=desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D);
-    Xpa(10)=Xpa(10)+100;
     v(1,:)=0;
 
     
@@ -36,8 +35,7 @@ for i=1:6
         end
     end
    % fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
-    [ C,D, Vpa ]=liga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D);
- 
+    [C,D,Vpa]=desloca_x(idVpa+5,Vpa,Xc,Yc,Xpa,Ypa,C,D,5);
     for j=1:500
         for k=1:64
             if (C(k,j)==1)
@@ -56,8 +54,8 @@ for i=1:6
             end
         end
     end
- %   idVpa=randi(63)+1;
-%    v(2,i)=idVpa;
+    idVpa=randi(63)+1;
+    v(2,i)=idVpa;
 end
 
 
