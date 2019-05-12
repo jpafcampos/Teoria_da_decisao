@@ -1,4 +1,4 @@
-function [vbest, xbest, ybest, Cbest, f] = SA_soma_ponderada(alpha, Epsilon, Xc, Yc, B, w)
+function [vbest, xbest, ybest, Cbest, f,f1,f2] = SA_soma_ponderada(alpha, Epsilon, Xc, Yc, B, w)
 
 % Contador de est�gios do m�todo
 %k = 0;
@@ -25,7 +25,7 @@ y = Ypa;
 
 
 %function [dist] = Dist_total(v, C, x, y, xc, yc, d) d é a demanda!!!
-[f] = fobj_somaponderada(v, C, x, y, Xc, Yc, B, w);
+[f, f1, f2] = fobj_somaponderada(v, C, x, y, Xc, Yc, B, w);
 
 
 % Define temperatura inicial
@@ -75,7 +75,9 @@ while (numEstagiosEstagnados <= 10 && nfe < 100)
         %atualiza o nfe
         nfe = nfe + 1;
         %C�lculo Delta E
-        DeltaE = fobj_somaponderada(vl, Cl, xl, yl, Xc, Yc, B, w) -fobj_somaponderada(v, C, x, y, Xc, Yc, B, w);
+        [fl,f1,f2] = fobj_somaponderada(vl, Cl, xl, yl, Xc, Yc, B, w);
+        [f_current,f1,f2] = fobj_somaponderada(v, C, x, y, Xc, Yc, B, w);
+        DeltaE = fl - f_current;
         %DeltaE = numero_pa(vl,x,y, Xc, Yc,Cl,B) - numero_pa(v,x,y,Xc,Yc,C,B);
         
         if DeltaE <= 0 
@@ -105,7 +107,7 @@ while (numEstagiosEstagnados <= 10 && nfe < 100)
             numEstagiosEstagnados = numEstagiosEstagnados + 1;
         end
             m = m + 1;
-            f = fobj_somaponderada(vbest, Cbest, xbest, ybest, Xc, Yc, B, w);
+            [f,f1,f2] = fobj_somaponderada(vbest, Cbest, xbest, ybest, Xc, Yc, B, w);
     end
 
     
@@ -117,5 +119,5 @@ while (numEstagiosEstagnados <= 10 && nfe < 100)
     end
     %k = k + 1;
 end
-f = fobj_somaponderada(vbest, Cbest, xbest, ybest, Xc, Yc, B, w);
+[f,f1,f2] = fobj_somaponderada(vbest, Cbest, xbest, ybest, Xc, Yc, B, w);
 end
