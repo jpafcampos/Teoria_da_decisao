@@ -78,7 +78,6 @@ end
 
 
 
-gVpa=zeros(1,Nc);
 
 for j=1:Nc
     id=find(pC(:,j)==1);
@@ -87,7 +86,6 @@ for j=1:Nc
         g=randi(tid,1,1);
         pC(:,j)=0;
         pC(id(g),j)=1;
-        gVpa(j)=id(g);
     end
 end
 

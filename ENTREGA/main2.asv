@@ -24,10 +24,8 @@ fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
 [ C,D, Vpa ]=desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D);
 for i=1:6
     [ C,D, Vpa ]=desliga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D);
-    Xpa(10)=Xpa(10)+100;
-    v(1,:)=0;
+    Xpa(1)=Xpa(1)+100;
 
-    
     for j=1:500
         for k=1:64
             if (C(k,j)==1)
@@ -37,16 +35,15 @@ for i=1:6
     end
    % fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
     [ C,D, Vpa ]=liga_pa( idVpa,Vpa,Xc,Yc,Xpa,Ypa,C,D);
- 
-    for j=1:500
+      for j=1:500
         for k=1:64
             if (C(k,j)==1)
                 v(1,j)=k;
             end
             
         end
-    end
-    g=find(v(:)==idVpa);
+      end
+    g=find(v==idVpa);
     fpa=numero_pa(Vpa, Xpa, Ypa, Xc, Yc,C,B);
     
     for j=1:500

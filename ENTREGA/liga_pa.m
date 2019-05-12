@@ -37,6 +37,7 @@ if (tid>0)
 end
 
 nVpa(idVpa)=1;
+nD=D;
 
 end
 
