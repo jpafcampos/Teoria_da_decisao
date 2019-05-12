@@ -1,4 +1,4 @@
-function [vbest, xbest, ybest, Cbest, fPa] = SAp(alpha, Epsilon, Xc, Yc, B)
+function [vbest, xbest, ybest, Cbest, fPA] = SAp(alpha, Epsilon, Xc, Yc, B)
 
 % Contador de estagios do metodo
 %k = 0;
@@ -26,7 +26,11 @@ vbest = Vpa;
 xbest = Xpa;
 ybest = Ypa;
 Cbest = C;
-fPa = numPA;
+fPA = numPA;
+
+%plot
+fbest_hist = fPA;
+fcurrent_hist = fPA;
 
 % Define temperatura inicial
 [to,nfe] = initialT(v, x, y, C, B,nfe,Xc,Yc,D);
@@ -83,7 +87,7 @@ while (numEstagiosEstagnados <= 10 && nfe < 10000)
              %Current Melhorou, zero o n de estagnados
              numEstagiosEstagnados = 0;
         else
-            if Aceite(DeltaE, tk ) 
+            if Aceite(DeltaE, tk ) == 1
                 v = vl;
                 C = Cl; 
             end
@@ -91,7 +95,10 @@ while (numEstagiosEstagnados <= 10 && nfe < 10000)
             numEstagiosEstagnados = numEstagiosEstagnados + 1;
         end
             m = m + 1;
-            fPa = numero_pa(vbest, xbest, ybest,Xc,Yc, Cbest,B);
+            fPA = numero_pa(vbest, xbest, ybest,Xc,Yc, Cbest,B);
+            fcPA = numero_pa(v,x,y,Xc,Yc,C,B);
+            fcurrent_hist = [fcurrent_hist fcPA];
+            fbest_hist = [fbest_hist fPA];
     end
 
      
@@ -102,5 +109,14 @@ while (numEstagiosEstagnados <= 10 && nfe < 10000)
     end
     %k = k + 1;
 end
-    fPa = numero_pa(vbest, xbest, ybest,Xc,Yc, Cbest,B);
+    fPA = numero_pa(vbest, xbest, ybest,Xc,Yc, Cbest,B);
+    fbest_hist = [fbest_hist fPA];
+    
+    %plot
+    plot(fbest_hist,'r')
+    hold on 
+    plot(fcurrent_hist, 'k')
+    hold off
+    xlabel('Número de iterações')
+    ylabel('Número de PAs')
 end
