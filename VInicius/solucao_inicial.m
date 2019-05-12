@@ -1,4 +1,4 @@
-function [ Xpa, Ypa, Vpa, C,D, gVpa ] = solucao_inicial(Xc,Yc,B)
+function [ Xpa, Ypa, Vpa, C,D] = solucao_inicial(Xc,Yc,B)
 
 %Dados iniciais do espaço.
 Ai=800;
@@ -32,8 +32,7 @@ for i=1:sPA
     end
     k=j+1;
 end
-gXpa=Xpa;
-gYpa=Ypa;
+
 
 D=zeros(nPA,Nc); %Distância de todas as PA's para clientes
 pC=ones(nPA,Nc); %Possiveis PA's a atender um cliente
@@ -88,10 +87,8 @@ for j=1:Nc
         g=randi(tid,1,1);
         pC(:,j)=0;
         pC(id(g),j)=1;
-        gVpa(j)=id(g);
     end
 end
-psize=30;
 
 C=pC;
  
