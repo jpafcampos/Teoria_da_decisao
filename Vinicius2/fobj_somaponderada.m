@@ -65,11 +65,12 @@ if (factivel == 1)
     end
    
     dist = dist*(1-w);
+    f = num_PA + dist;
 else
     f = 100000;
 end
 
-f = num_PA + dist;
+
 
 end
 

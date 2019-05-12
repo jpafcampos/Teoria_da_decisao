@@ -1,4 +1,4 @@
-function [f] = fobj_somaponderada(v, C, x, y, xc, yc, B, w)
+function [f] = fobj_eps_restrito(v, C, x, y, xc, yc, B, w)
 nPA = length(x);
 nC = 500;
 dist = 0;
