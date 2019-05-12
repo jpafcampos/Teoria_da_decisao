@@ -26,7 +26,7 @@ vbest = Vpa;
 xbest = Xpa;
 ybest = Ypa;
 Cbest = C;
-fPa = numPa;
+fPa = numPA;
 
 % Define temperatura inicial
 [to,nfe] = initialT(v, x, y, C, B,nfe,Xc,Yc,D);
@@ -48,7 +48,7 @@ viz = 1;
 
 
 % Criterio de parada 
-while (numEstagiosEstagnados <= 10 && nfe < 10000 && numPA > min_num_PA)    
+while (numEstagiosEstagnados <= 10 && nfe < 10000)    
     %contador
     m = 0;
     
@@ -69,10 +69,9 @@ while (numEstagiosEstagnados <= 10 && nfe < 10000 && numPA > min_num_PA)
         DeltaE = numero_pa(vl,x,y, Xc, Yc,Cl,B) - numero_pa(v,x,y,Xc,Yc,C,B);
         
         if DeltaE <= 0 
-             %Sol Corrente
+             %Sol Corrente, boas são sempre aceitas
              v = vl;
              C = Cl;
-             
              %melhor sol
              if numero_pa(vbest, xbest, ybest,Xc,Yc, Cbest,B) - numero_pa(v,x,y,Xc,Yc,C,B) > 0
                  vbest = v;
@@ -86,19 +85,16 @@ while (numEstagiosEstagnados <= 10 && nfe < 10000 && numPA > min_num_PA)
         else
             if Aceite(DeltaE, tk ) 
                 v = vl;
-                C = Cl;
-                x = xl;
-                y = yl; 
+                C = Cl; 
             end
-            %current Melhorou, incremento a estagnados
+            %current não melhorou, incremento a estagnados
             numEstagiosEstagnados = numEstagiosEstagnados + 1;
         end
             m = m + 1;
             fPa = numero_pa(vbest, xbest, ybest,Xc,Yc, Cbest,B);
     end
 
-    
-    %Usar o Geomï¿½trico 
+     
     tk = alpha*tk;
     
     if tk <= Epsilon

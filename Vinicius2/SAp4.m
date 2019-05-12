@@ -1,82 +1,88 @@
-function [vbest, xbest, ybest, Cbest, dist] = SAp2(alpha, Epsilon, Xc, Yc, B)
+function [vbest, xbest, ybest, Cbest, fdist] = SAp4(alpha, Epsilon, Xc, Yc, B)
 
-% Contador de est�gios do m�todo
+% Contador de estagios do metodo
 %k = 0;
 
-% Contador do n�mero de avalia��es de f(.)
+% Contador do numero de avaliacoes de f(.)
 nfe = 0; 
 
-% Gera solu��o inicial
+% Gera solucao inicial
  
 [Xpa,Ypa, Vpa, C,D] = solucao_inicial(Xc, Yc, B);
 
-%solu��o melhor recebe inicial
+%solucao melhor recebe inicial
 vbest = Vpa;
 xbest = Xpa;
 ybest = Ypa;
 Cbest = C;
 
-%solu��o corrente:
+%solucao corrente:
 
 v = Vpa;
 x = Xpa;
 y = Ypa;
+xl = Xpa;
+yl = Ypa;
+vl = Vpa;
+%coordenada que sofrera operacao de mudanca de posicao
+viz = randi([4,6]);
 
-%coordenada que sofrerá operacao de mudanca de posicao
-operacao = 5;
-
-%function [dist] = Dist_total(v, C, x, y, xc, yc, d) d é a demanda!!!
-dist = Dist_total(v, C, x, y, Xc, Yc, B);
+% d da demanda!!!
+fdist = Dist_total(v, C, x, y, Xc, Yc, B);
 
 
 % Define temperatura inicial
-%[to, nfe] = initialT(v, x, y, C, d,nfe);
-to = 31;
-nfe = 0;
+[to,nfe] = initialT2(v, x, y, C, B,nfe,Xc,Yc,D);
 tk = to;
-%n de itera��es executadas na linha K
+
+
+%n de iteracoes executadas na linha K
 mk = 10; 
 
 
-% Crit�rio de parada do algoritmo
- numEstagiosEstagnados = 0;
+% Criterio de parada do algoritmo
+numEstagiosEstagnados = 0;
  
 
-% Crit�rio de parada 
-while (numEstagiosEstagnados <= 10 && nfe < 100)    
+% Criterio de parada 
+while (numEstagiosEstagnados <= 10 && nfe < 10000)    
     %contador
     m = 0;
     
     while m <= mk
-        %Gere uma solu��o xl E N(x)
-        %[ Xfim, Cl] = Neighborhood5 (Xinit, C)
-        indice = round(63*rand()) + 1;
-        if operacao == 5
+        %Gere uma solucao xl E N(x)
+        nPA = sum(v);
+        indice = round((nPA-1)*rand()) + 1;
+        
+        if viz == 4
+            [Cl,D,vl] =  Neighborhood(v, Xc,Yc, Xpa, Ypa, C, D,1); 
+        end
+        if viz == 5
            xindice = x(indice);
           [xfim, Cl,D,v] =  Neighborhood5(xindice, indice,v, Xc, Yc,x,y,C,D); %modifica o C tb n � o indice da vizinhan�a
-          yl = y;
-          xl = x;
           xl(indice) = xfim;
-         if operacao == 6
-           yindice = x(indice);
+        end
+        %A vizinhan�a 6 move o y com os mesmos parametros de x. 
+         if viz == 6
+           yindice = y(indice);
           [yfim, Cl,D,v] =  Neighborhood5(yindice, indice,v, Xc, Yc,x,y,C,D); %modifica o C tb n � o indice da vizinhan�a
-          yl = y;
-          xl = x;
           yl(indice) = yfim;
         end
-        
+
+     
         %atualiza o nfe
         nfe = nfe + 1;
-        %C�lculo Delta E
-        DeltaE = Dist_total(v, Cl, xl, y, Xc, Yc, B) - Dist_total(v, C, x, y, Xc, Yc, B);
+        %Calculo Delta E
+        DeltaE = Dist_total(v, Cl, xl, yl, Xc, Yc, B) - Dist_total(v, C, x, y, Xc, Yc, B);
         %DeltaE = numero_pa(vl,x,y, Xc, Yc,Cl,B) - numero_pa(v,x,y,Xc,Yc,C,B);
         
         if DeltaE <= 0 
              %Sol Corrente
              x = xl;
              C = Cl;
-             
-             %melhor solu��o
+             y = yl;
+             v = vl;
+             %melhor solucao
              if Dist_total(vbest, Cbest, xbest, ybest,Xc,Yc,B) - Dist_total(v,C,x,y,Xc,Yc,B) > 0
                  vbest = v;
                  xbest = x;
@@ -84,29 +90,32 @@ while (numEstagiosEstagnados <= 10 && nfe < 100)
                  Cbest = C;
              end
              
-             %Current Melhorou, zero o n�mero de estagnados
+             %Current Melhorou, zero o numero de estagnados
              numEstagiosEstagnados = 0;
         else
-            if Aceite(DeltaE, tk ) %Fun��o Aceite;
+            if Aceite(DeltaE, tk ) %Funcao Aceite;
                 C = Cl;
                 x = xl;
                 y = yl; 
+                v = vl;
             end
             %current Melhorou, incremento a estagnados
             numEstagiosEstagnados = numEstagiosEstagnados + 1;
         end
             m = m + 1;
-            dist = Dist_total(vbest, Cbest, xbest, ybest,Xc,Yc,B);
+            fdist = Dist_total(vbest, Cbest, xbest, ybest,Xc,Yc,B);
     end
 
     
-    %Usar o Geom�trico 
+
     tk = alpha*tk;
     
     if tk <= Epsilon
         tk = to;
     end
-    %k = k + 1;
+
+    
 end
- dist = Dist_total(vbest, Cbest, xbest, ybest,Xc,Yc,B);
+fdist = Dist_total(vbest, Cbest, xbest, ybest,Xc,Yc,B);
 end
+ 
