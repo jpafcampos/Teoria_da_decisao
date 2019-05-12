@@ -25,13 +25,5 @@ if(r == 4)
     Y = Ypa;
 end
 
-if(r == 5)
-    [C,D,Vpa,X,Y] = Neighborhood5(vinit, Xc,Yc, Xpa, Ypa, C, D);
-end
-
-if(r == 6)
-    [C,D,Vpa,X,Y] = Neighborhood6(vinit, Xc,Yc, Xpa, Ypa, C, D);
-end
-
 end
 

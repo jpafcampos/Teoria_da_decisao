@@ -1,4 +1,4 @@
-function [to,nfe] = initialT(v, x, y, C, d,nfe,Xc,Yc)
+function [to,nfe] = initialT(v, x, y, C, B,nfe,Xc,Yc, D)
 
 
 N   = 100;      % número de testes
@@ -11,9 +11,9 @@ DeltaE = [1,N];   %DeltaE vetor que sarmazena DE
 for k = 1:N,
     %perturbação usan N(1)
     %[vl,xl,yl, Cl] =  Neighborhood(v,x,y,C,1);
-    [Cl,D,vl] =  Neighborhood(v, Xc,Yc, Xpa, Ypa, C, D,viz);
+    [Cl,D,vl] =  Neighborhood(v, Xc,Yc, x, y, C, D,1);
     %diferença DeltaE
-    DE = NPA(vl,x,y,C,d, Xc, Yc) - NPA(v,x,y,C,d,Xc, Yc);
+    DE = numero_pa(vl, x, y, Xc, Yc, Cl, B) - numero_pa(v, x, y, Xc, Yc, C, B);
     %Atualiza número nfe
     nfe = nfe + 1; 
     

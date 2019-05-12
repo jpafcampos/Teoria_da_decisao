@@ -1,69 +1,71 @@
-function [vbest, xbest, ybest, Cbest, fpa] = SAp(alpha, Epsilon, Xc, Yc, B)
+function [vbest, xbest, ybest, Cbest, fPa] = SAp(alpha, Epsilon, Xc, Yc, B)
 
-% Contador de estï¿½gios do mï¿½todo
+% Contador de estagios do metodo
 %k = 0;
 
-% Contador do nï¿½mero de avaliaï¿½ï¿½es de f(.)
+% Contador do numero de avaliacoes de f(.)
 nfe = 0; 
 
-% Gera soluï¿½ï¿½o inicial
+% Gera solucao inicial
  
 [Xpa,Ypa, Vpa, C,D] = solucao_inicial(Xc, Yc, B);
 
-%solução melhor recebe inicial
-vbest = Vpa;
-xbest = Xpa;
-ybest = Ypa;
-Cbest = C;
 
-%solução corrente:
+%solucao corrente:
 
 v = Vpa;
 x = Xpa;
 y = Ypa;
 
 
-%Nï¿½mero inicial de PA. NAP ï¿½ a funï¿½ï¿½o objetivo para este problema
-%[numPA] = numero_pa(v, x, y, Xc, Yc C, d)
+%Numero inicial de PAs 
 numPA = numero_pa(v, x, y, Xc, Yc, C, B);
 
+%solução melhor recebe inicial
+vbest = Vpa;
+xbest = Xpa;
+ybest = Ypa;
+Cbest = C;
+fPa = numPa;
 
 % Define temperatura inicial
-%[to, nfe] = initialT(v, x, y, C, d,nfe);
-to = 31;
+[to,nfe] = initialT(v, x, y, C, B,nfe,Xc,Yc,D);
 tk = to;
-%n de iteraï¿½ï¿½es executadas na linha K
+
+%n de iteracoes executadas na linha K
 mk = 10; 
 
 
-%nï¿½mero mï¿½nimo de PA
+%numero minimo de PA
 min_num_PA = 33;
 
 
 viz = 1;
 
-% Critï¿½rio de parada do algoritmo
+% Criterio de parada do algoritmo
  numEstagiosEstagnados = 0;
  
 
 
-% Critï¿½rio de parada 
-while (numEstagiosEstagnados <= 10 && nfe < 100 && numPA > min_num_PA)    
+% Criterio de parada 
+while (numEstagiosEstagnados <= 10 && nfe < 10000 && numPA > min_num_PA)    
     %contador
     m = 0;
     
     while m <= mk
-        %Gere uma soluï¿½ï¿½o xl E N(x)
-        % viszinhanças ordenadas
+        %Gere uma solucao xl E N(x)
+        % vizinhanças ordenadas
         if viz == 5
             viz =1;
         end
-        [Cl,D,vl] =  Neighborhood(v, Xc,Yc, Xpa, Ypa, C, D,viz); %modifica o C tb n ï¿½ o indice da vizinhanï¿½a
+        [Cl,D,vl] =  Neighborhood(v, Xc,Yc, Xpa, Ypa, C, D,viz); 
+        %muda a vizinhanca pra perturbacao
         viz = viz + 1;
         %atualiza o nfe
         nfe = nfe + 1;
-        %Cï¿½lculo Delta E
-
+        
+        
+        %Calculo Delta E
         DeltaE = numero_pa(vl,x,y, Xc, Yc,Cl,B) - numero_pa(v,x,y,Xc,Yc,C,B);
         
         if DeltaE <= 0 
@@ -71,7 +73,7 @@ while (numEstagiosEstagnados <= 10 && nfe < 100 && numPA > min_num_PA)
              v = vl;
              C = Cl;
              
-             %melhor soluï¿½ï¿½o
+             %melhor sol
              if numero_pa(vbest, xbest, ybest,Xc,Yc, Cbest,B) - numero_pa(v,x,y,Xc,Yc,C,B) > 0
                  vbest = v;
                  xbest = x;
@@ -79,10 +81,10 @@ while (numEstagiosEstagnados <= 10 && nfe < 100 && numPA > min_num_PA)
                  Cbest = C;
              end
              
-             %Current Melhorou, zero o nï¿½mero de estagnados
+             %Current Melhorou, zero o n de estagnados
              numEstagiosEstagnados = 0;
         else
-            if Aceite(DeltaE, tk ) %Funï¿½ï¿½o Aceite
+            if Aceite(DeltaE, tk ) 
                 v = vl;
                 C = Cl;
                 x = xl;
@@ -91,8 +93,8 @@ while (numEstagiosEstagnados <= 10 && nfe < 100 && numPA > min_num_PA)
             %current Melhorou, incremento a estagnados
             numEstagiosEstagnados = numEstagiosEstagnados + 1;
         end
-            m = m + 1
-            fpa = numero_pa(vbest, xbest, ybest,Xc,Yc, Cbest,B);
+            m = m + 1;
+            fPa = numero_pa(vbest, xbest, ybest,Xc,Yc, Cbest,B);
     end
 
     
@@ -104,5 +106,5 @@ while (numEstagiosEstagnados <= 10 && nfe < 100 && numPA > min_num_PA)
     end
     %k = k + 1;
 end
-    fpa = numero_pa(vbest, xbest, ybest,Xc,Yc, Cbest,B);
+    fPa = numero_pa(vbest, xbest, ybest,Xc,Yc, Cbest,B);
 end
