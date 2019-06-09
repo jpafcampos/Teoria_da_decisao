@@ -45,4 +45,4 @@ for j=1:nCriterios
     end
 end
 
-MatrizCandidatosNormalizada=MatrizCandidatosNormalizada*20;
+MatrizCandidatosNormalizada=MatrizCandidatosNormalizada*10;
