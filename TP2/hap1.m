@@ -1,4 +1,4 @@
-function [ Ranking ] = hap1( MatrizCandidatos,PrioridadeGeral )
+function [VetorResultado, Ranking ] = hap1( MatrizCandidatos,PrioridadeGeral )
 
 T=size(MatrizCandidatos);
 PrioridadeCriterio=zeros(T(1),T(2));

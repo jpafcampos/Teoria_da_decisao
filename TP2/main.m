@@ -33,7 +33,7 @@ end
 
 MatrizCandidatos=sol;
 MatrizCandidatos(:,3)=1-sol(:,3);
-Rankinghap1 = hap1( MatrizCandidatos,Prioridade );
+[Resultadohap1,Rankinghap1] = hap1( MatrizCandidatos,Prioridade );
 
 MatrizCandidatosNormalizada=MatrizCandidatos;
 
@@ -46,3 +46,4 @@ for j=1:nCriterios
 end
 
 MatrizCandidatosNormalizada=MatrizCandidatosNormalizada*10;
+
