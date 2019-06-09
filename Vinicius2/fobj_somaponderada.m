@@ -56,21 +56,25 @@ end
 
 if (factivel == 1)
     num_PA = sum(v);
-    f1 = num_PA;
-    num_PA = (num_PA - 30)/(100-30);
+    num_PA = (num_PA - 25)/(100-25);
     num_PA = num_PA*w;
+    f1 = num_PA;
     for i=1:nPA
         for j=1:nC
             dist = dist + v(i)*C(i,j)*sqrt((x(i)-xc(j))^2+(y(i)-yc(j))^2);
         end
     end
-   f2 = dist;
+
+    
+    dist = (dist-15000)/(30000 -15000);
     dist = dist*(1-w);
+    f2 = dist;
     f = num_PA + dist;
+
 else
-    f = 100000;
-    f1 = 100000;
-    f2 = 100000;
+    f1 = 2;
+    f2 = 3;
+    f = 5;
 end
 
 

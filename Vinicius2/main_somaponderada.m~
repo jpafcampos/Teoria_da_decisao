@@ -1,0 +1,29 @@
+clc
+clear all
+close all
+
+%Leitura dos dados de entrada
+data = readtable('clientes.csv');
+Xc=table2array(data(:,1));
+Yc=table2array(data(:,2));
+B=table2array(data(:,3));
+
+%quanto maior o peso 'w', maior a enfase dada a função 2 - dist
+%SA_soma_ponderada(alpha, Epsilon, Xc, Yc, B, w)
+
+w = 0.1;
+for i = 1:10
+    [vbest, xbest, ybest, Cbest, f, f1, f2] = SA_soma_ponderada(0.9, 1e-1, Xc, Yc, B, w);
+    num_Pa = floor(f1 * 75 + 25);
+    dist = f2 * 15000 + 15000;
+    cobertura = sum(sum(Cbest))/500;
+    for i=1:num_PA
+        b = sum(B(:)*Cbest(i,:));
+
+    end
+    sol(i,1) = num_Pa;
+    sol(1,2) = dist;
+    sol(1,3) = cobertura;
+    
+    
+end
